@@ -1,11 +1,10 @@
 /**
  * Module dependencies.
  */
-var express = require('express')	//express - application framework for node
- 	, fs = require('fs')			//fs - filesystem libraru
-	, http = require('http')		//http - give me server
-	, _ = require('underscore')		//underscore - some extra JS sugar
-	, path = require('path');		//http://nodejs.org/docs/v0.4.9/api/path.html
+var express = require('express'),	//express - application framework for node
+ 	fs = require('fs'),				//fs - filesystem libraru
+	http = require('http'),			//http - give me server
+	path = require('path');			//http://nodejs.org/docs/v0.4.9/api/path.html
 
 
 /**
@@ -13,8 +12,8 @@ var express = require('express')	//express - application framework for node
  * Please note that the order of loading is important.
  */
 
-var env = process.env.NODE_ENV || 'local'		//get the environemnt var or set as development
-	, config = require('./config/config')[env];	//get config based on the specifed environment
+var env = process.env.NODE_ENV || 'local',		//get the environemnt var or set as development
+	config = require('./config/config')[env];	//get config based on the specifed environment
 
 
 console.log('ENVIRONMENT = ' + env);

@@ -7,7 +7,7 @@ TMW.TwitterPoll = {
 
 	init : function () {
 
-		this.wallContent = $('#wall-content');
+		this.wallContent = document.querySelector('#wall-content');
 
 		this.makeSocketConnection();
 
@@ -26,6 +26,28 @@ TMW.TwitterPoll = {
 	},
 
 
+	//All our socket events should be initiated in here, so they don’t get scattered about the place too much
+	EventListeners : {
+		onPageStart : function () {
+
+			log('script.js :: setup event listener :: onPageStart');
+
+			//will receive this event when a connection is made
+			TMW.TwitterPoll.socket.on('state', TMW.TwitterPoll.setupScreen);
+
+
+		},
+		onTweet : function () {
+
+			log('script.js :: setup event listener :: onTweet');
+
+			//this handles the tweets we receive from our server
+			TMW.TwitterPoll.socket.on('tweet', TMW.TwitterPoll.tweetRecieved);
+
+		}
+	},
+
+
 	setupScreen : function (state) {
 
 		log('script.js :: setupScreen');
@@ -39,37 +61,15 @@ TMW.TwitterPoll = {
 
 	},
 
-	EventListeners : {
-		onPageStart : function () {
+	tweetRecieved : function (tweet) {
 
-			log('script.js :: event :: onPageStart');
+		var newListElement;
 
-			//will receive this event when a connection is made
-			TMW.TwitterPoll.socket.on('data', TMW.TwitterPoll.setupScreen);
+		newListElement = document.createElement('p');
+		newListElement.innerHTML = tweet.text;
+		TMW.TwitterPoll.wallContent.prependChild(newListElement);
 
-
-		},
-		onTweet : function () {
-
-			var newListElement;
-
-			//this handles the tweets we receive from our server
-			TMW.TwitterPoll.socket.on('tweet', function(tweet) {
-
-				newListElement = document.createElement('p');
-				newListElement.innerHTML = tweet.text;
-				TMW.TwitterPoll.wallContent.prependChild(newListElement);
-
-				$('#last-update').innerHTML = new Date().toTimeString();
-
-			});
-
-		}
-	},
-
-	updateWall : function (tweet) {
-
-
+		$('#last-update').innerHTML = new Date().toTimeString();
 
 	}
 

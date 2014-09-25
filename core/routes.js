@@ -12,12 +12,14 @@ var async = require('async')
 
 module.exports = function (app, twitter) {
 
+	//Home route
 	app.get('/', function(req, res) {
         res.render('index', {
-        	title : 'Twitter Streaming Wall',
+        	title : 'Twitter Hashtag Streaming',
         	tags : twitter.globalState.tags
         });
 	});
+
 
 	// assume "not found" in the error msgs
 	// is a 404. this is somewhat silly, but
@@ -38,6 +40,7 @@ module.exports = function (app, twitter) {
 		// error page
 		res.status(500).render('500', { error: err.stack });
 	});
+
 
 	// assume 404 since no middleware responded
 	app.use(function(req, res, next){
