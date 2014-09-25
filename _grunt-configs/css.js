@@ -17,8 +17,8 @@ module.exports.tasks = {
 				loadPath : 'scss/'
 			},
 			files: {
-				'css/temp/<%=config.scss.cssFile%>.css'       : 'scss/<%=config.scss.cssFile%>.scss',
-				'css/temp/<%=config.scss.cssFile%>-old-ie.css': 'scss/<%=config.scss.cssFile%>-old-ie.scss'
+				'public/css/temp/<%=config.scss.cssFile%>.css'       : 'public/scss/<%=config.scss.cssFile%>.scss',
+				'public/css/temp/<%=config.scss.cssFile%>-old-ie.css': 'public/scss/<%=config.scss.cssFile%>-old-ie.scss'
 			}
 		},
 		styleguide: {
@@ -52,8 +52,8 @@ module.exports.tasks = {
 		kickoff: {
 			expand: true,
 			flatten: true,
-			src: 'css/temp/*.css',
-			dest: 'css/'
+			src: 'public/css/temp/*.css',
+			dest: 'public/css/'
 		},
 
 		styleguide : {
@@ -74,8 +74,8 @@ module.exports.tasks = {
 				restructure: false //turns structural optimisations off as can mess up fallbacks http://bem.info/tools/optimizers/csso/description/
 			},
 			files: {
-				'css/<%=config.scss.cssFile%>.css'       : 'css/<%=config.scss.cssFile%>.css',
-				'css/<%=config.scss.cssFile%>-old-ie.css': 'css/<%=config.scss.cssFile%>-old-ie.css'
+				'public/css/<%=config.scss.cssFile%>.css'       : 'public/css/<%=config.scss.cssFile%>.css',
+				'public/css/<%=config.scss.cssFile%>-old-ie.css': 'public/css/<%=config.scss.cssFile%>-old-ie.css'
 			},
 
 		}

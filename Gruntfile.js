@@ -27,8 +27,7 @@ module.exports = function (grunt) {
 				// <%=config.js.fileList%>
 				fileList : [
 					'public/js/helpers/shims.js',
-					'public/js/helpers/console.js',
-
+					'public/js/helpers/log.js',
 					'public/js/script.js'
 				]
 			},

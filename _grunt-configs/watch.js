@@ -7,7 +7,7 @@ module.exports.tasks = {
 	*/
 	watch: {
 		scss: {
-			files: ['scss/**/*.scss', '!scss/styleguide.scss'],
+			files: ['public/scss/**/*.scss', '!public/scss/styleguide.scss'],
 			tasks: [
 				'sass:kickoff',
 				'autoprefixer:kickoff'
@@ -15,7 +15,7 @@ module.exports.tasks = {
 		},
 
 		"styleguide_scss": {
-			files: ['scss/styleguide.scss'],
+			files: ['public/scss/styleguide.scss'],
 			tasks: [
 				'sass:styleguide',
 				'autoprefixer:styleguide'
@@ -30,7 +30,7 @@ module.exports.tasks = {
 		livereload: {
 			options: { livereload: true },
 			files: [
-				'css/*.css'
+				'public/css/*.css'
 			]
 		},
 
@@ -41,6 +41,10 @@ module.exports.tasks = {
 				'svgmin',
 				'grunticon'
 			]
+		},
+
+		grunt: {
+			files: ['_grunt-configs/*.js', 'Gruntfile.js']
 		}
 	}
 };

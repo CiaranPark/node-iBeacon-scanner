@@ -11,8 +11,14 @@ html
 		div(class="container #{page}")
 			include ../includes/header
 
-			.page-content
-				#wall-content.wall-content
+			.page-content.g-container
+				.g-row
+					.g-col.g-span6
+						ul#wall-content.wall-content
+					.g-col.g-span6
+						.range--power
+							label.current-Power
+							input.power(type="range" name="range1" min="0" max="10" step="2" value="0")
 
 			include ../includes/footer
 

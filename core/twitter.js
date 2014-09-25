@@ -10,7 +10,7 @@ var express = require('express'),
 	twitter = require('twitter'), //ntwitter - allows easy JS access to twitter API's - https://github.com/AvianFlu/ntwitter
 
 	pkg = require('../package.json'),
-
+	FAKE_TWEET = true,
 	SERVER_BACKOFF_TIME = 30000; //Twitter backoff set to 30 seconds
 
 
@@ -64,10 +64,20 @@ module.exports = function (app, server, config) {
 
 	t.openStream = function () {
 
-		console.log('twitter.js :: openStream');
-		t.createStream();
+		if (FAKE_TWEET) {
+			setInterval(function() {
+				data = {
+					text : 'fake tweet'
+				};
+				t.emitTweet(data);
+			}, 1000);
+
+		} else {
+			t.createStream();
+		}
 
 	};
+
 	t.createStream = function () {
 
 		//Tell the twitter API to filter on the watchSymbols

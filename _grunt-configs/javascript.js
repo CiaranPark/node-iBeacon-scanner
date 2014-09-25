@@ -15,7 +15,7 @@ module.exports.tasks = {
 				drop_console: false
 			},
 
-			beautify: false, // beautify: beautify your code for debugging/troubleshooting purposes
+			beautify: true, // beautify: beautify your code for debugging/troubleshooting purposes
 			// report: 'gzip', // report: Show file size report
 			sourceMap: '<%=config.js.distDir%><%=config.js.distFile%>.map',
 			sourceMappingURL: '/<%=config.js.distFile%>.map',
