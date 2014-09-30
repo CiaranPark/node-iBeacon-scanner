@@ -1,3 +1,189 @@
 
+// Form
+$form-background-color:         #fff !default;
+$form-box-shadow:               0 4px 2px rgba(0,0,0,0.075), 0 0 8px rgba(0,0,0,0.15) !default;
+$form-width:                    240px !default;
+$form-height:                   260px !default;
+// Range
+$range-background-color:        #46535f !default;
+$range-color:                   #16C5DB !default;
+$range-border-color:            #03519B !default;
+$range-box-shadow:              -1px 0 1px rgba(0,0,0,0.25) inset, 0 -3px 0 rgba(0,0,0,0.1) inset;
+$range-height:                  $form-height / 1.5 !default;
+$range-width:                   16px !default;
+$range-border-radius:           $range-width / 2 !default;
+$range-thumb-background:        linear-gradient(left, #efefef, #fafafa) !default;
+// Range - Thumb
+$range-thumb-width:             $range-width * 2 !default;
+$range-thumb-height:            $range-width * 2 !default;
+$range-thumb-box-shadow:        1px 0 2px rgba(0,0,0,0.1), 1px 0 1px rgba(0,0,0,0.5) inset, -#{$range-thumb-height / 6} 0 #{$range-thumb-height / 8} rgba(0,0,0,0.15) !default;
+$range-thumb-border:            1px solid rgba(0,0,0,0.25) !default;
+
+.section--tweets {
+    height: 100%;
+
+    .tweet {
+        float: left;
+        padding: 40px 0;
+        width: 100%;
+
+        &:nth-child(odd) {
+            background: $table-bg-accent;
+        }
+
+        &.inactive {
+            background: $pink;
+            opacity: 0.5
+        }
+
+        &.sent {
+            background: $green;
+            opacity: 0.5
+        }
+
+        .title {
+            display: block;
+            margin: 0 0 20px 0;
+        }
+
+        .btn {
+            display: block;
+        }
+    }
+
+}
+
+.section--power {
+    background: $gray;
+    height: 100%;
+}
+
 .range--power {
+    float: left;
+    width: 100%;
+
+    // Range
+    .slider {
+        border-radius: 25px;
+        transform :rotate(-90deg);
+        float: left;
+        position: relative;
+        width: $range-height;
+        height: $range-width;
+        padding: 20px 5px;
+        margin: #{$range-height / 2} 0 -#{$range-height / 1.625} 0;
+        background: $range-background-color;
+        // Used in updateRangeOuput JS function as first gradient color
+        color: #16C5DB;
+        // Used in updateRangeOuput JS function as second gradient color
+        border-color: #03519B;
+        -webkit-appearance: none !important;
+        outline: none;
+
+        // Range - Thumb
+        &::-webkit-slider-thumb {
+            background: $green;
+            border-radius :$range-thumb-width;
+            border: 0;
+            position: relative;
+            -webkit-appearance: none !important;
+            width: $range-thumb-width;
+            height: $range-thumb-height;
+            border: $range-thumb-border;
+            cursor: pointer;
+        }
+    }
+
+    .meter {
+        float: left;
+        list-style: none;
+        margin: 5px 0 0 0;
+        padding: 0;
+        width: 150px;
+        text-align: right;
+
+        .step {
+            color: #afafb1;
+            border-bottom: 2px solid #31313b;
+            padding: ($range-thumb-height / 2) / 5 0;
+            position: relative;
+
+            &:nth-last-child(1){
+                border: none;
+            }
+
+            &:after {
+                content: '__';
+                border-bottom: 2px solid #31313b;
+                border-top: 2px solid #31313b;
+                display: block;
+                line-height: 0.1em;
+                padding: 0 0 14px 0; // magic numbers abound!
+                position: absolute;
+                left: 0;
+                top: 6px; // magic numbers abound!
+            }
+        }
+
+        .step.active {
+            color: $green;
+        }
+    }
+}
+
+.modal {
+    background: $blue;
+    border: 2px $blue solid;
+    color: #FFF;
+    height: 100%;
+    left: 0;
+    padding: 0 30% 0 30%;
+    position: absolute;
+    right: 0;
+    text-align: left;
+    top: 0;
+    z-index: 9999;
+
+    .wrap {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.modal--delete {
+        background: $pink;
+    }
+
+    .title,
+    .subTitle {
+        margin: 0 0 10px 0;
+    }
+
+    .subTitle {
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .content {
+        margin: 0 0 30px 0;
+    }
+
+    .action {
+        border-top: 6px #FFF solid;
+        float: left;
+        padding: 10px 0 0 0;
+
+        .btn {
+            background: #3a3a44;
+            text-align: center;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        .btn--false {
+        }
+
+    }
 }

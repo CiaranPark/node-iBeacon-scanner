@@ -13,13 +13,15 @@ html
 
 			.page-content.g-container
 				.g-row
-					.g-col.g-span6
+					section.g-col.g-span8.section--tweets
 						ul#wall-content.wall-content
-					.g-col.g-span6
+					section.g-col.g-span4.section--power
 						.range--power
-							label.current-Power
-							input.power(type="range" name="range1" min="0" max="10" step="2" value="0")
+							input.slider(type="range" name="slide" min="0" max="4" step="1" value="0")
+							ul.meter
 
+
+			include ../shared/modal
 			include ../includes/footer
 
 	include ../includes/foot

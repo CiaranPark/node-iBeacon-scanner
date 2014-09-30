@@ -6,89 +6,68 @@
 
 var express = require('express'),
 	io = require('socket.io'), //socket.io - used for our websocket connection
+	socketServer = null,
 	client = require('socket.io-client'),
 	twitter = require('twitter'), //ntwitter - allows easy JS access to twitter API's - https://github.com/AvianFlu/ntwitter
 
-	pkg = require('../package.json'),
+	pkg = require('../../package.json'),
+	SocketController = null,
 	FAKE_TWEET = true,
-	SERVER_BACKOFF_TIME = 30000; //Twitter backoff set to 30 seconds
+	SERVER_BACKOFF_TIME = 5000; //Twitter backoff set to 30 seconds
 
+var TwitterController = {
 
-module.exports = function (app, server, config) {
+	t : null,
 
-	//Start a Socket.IO listen
-	var socketServer = io.listen(server);
-	socketServer.set('log level', 1); //don't log all emits etc
-
-
-	//  ==================
-	//  === ON CONNECT ===
-	//  ==================
-
-	//If a client connects, give them the current data that the server has tracked
-	//so here that would be how many tweets of each type we have stored
-	socketServer.sockets.on('connection', function(socket) {
-		console.log('twitter.js :: New connection');
-
-		// emits our global state under
-		socketServer.sockets.emit('state', t.globalState);
-	});
-
-	//  ============================
-	//  === SERVER ERROR LOGGING ===
-	//  ============================
-
-	socketServer.sockets.on('close', function(socket) {
-		console.log('twitter.js :: socketServer has closed');
-	});
-
-
-
-
-	//  ====================================
-	//  === TWITTER CONNECTION TO STREAM ===
-	//  ====================================
-
-	//Instantiate the twitter component
-	var t = new twitter(config.twitter);
-
-	//  =============================
-	//  === State related object  ===
-	//  =============================
-	//
-	//  Store anything related to global state here
-	//
-	t.globalState = {
+	globalState : {
 		tags : ['dogs', 'cats']
-	}
+	},
 
-	t.openStream = function () {
+	init : function (app, server, socketController, config) {
+
+		SocketController = socketController;
+
+		TwitterController.t = new twitter(config.twitter);
+
+		_self.openStream();
+
+		return TwitterController;
+	},
+
+	openStream : function () {
 
 		if (FAKE_TWEET) {
+			var id = 0
 			setInterval(function() {
 				data = {
-					text : 'fake tweet'
+					symbol: 'fake symbol',
+					time: 'fake time',
+					text: 'fake text',
+					user : {
+						name : 'fake name'
+					},
+					id: id++
 				};
-				t.emitTweet(data);
-			}, 1000);
+				TwitterController.emitTweet(data);
+			}, 6000);
 
 		} else {
-			t.createStream();
+			TwitterController.createStream();
 		}
 
-	};
+	},
 
-	t.createStream = function () {
+	createStream : function () {
 
 		//Tell the twitter API to filter on the watchSymbols
-		t.stream('statuses/filter', {
-			track: t.globalState.tags,
+		TwitterController.t.stream('statuses/filter', {
+			track: TwitterController.globalState.tags,
 			language: 'en'
 		}, function(stream) {
 
 			//We have a connection. Now watch the 'data' event for incomming tweets
 			//sent from the twitter API hook that we're using
-			stream.on('data', t.emitTweet);
+			stream.on('data', TwitterController.emitTweet);
 
 			//catch any errors from the streaming API
 			stream.on('error', function(error) {
@@ -96,7 +75,7 @@ module.exports = function (app, server, config) {
 
 				//try reconnecting to twitter in 30 seconds
 				setTimeout(function () {
-					t.openStream();
+					TwitterController.openStream();
 				}, SERVER_BACKOFF_TIME);
 
 			});
@@ -106,7 +85,7 @@ module.exports = function (app, server, config) {
 
 				//try reconnecting to twitter in 30 seconds
 				setTimeout(function () {
-					t.openStream();
+					TwitterController.openStream();
 				}, SERVER_BACKOFF_TIME);
 
 			});
@@ -116,17 +95,16 @@ module.exports = function (app, server, config) {
 
 				//try reconnecting to twitter in 30 seconds
 				setTimeout(function () {
-					t.openStream();
+					TwitterController.openStream();
 				}, SERVER_BACKOFF_TIME);
 			});
 		});
 
-	};
+	},
 
 	//this function is called any time we receive some data from the twitter stream
 	//we go through the tags, work out which one was mentioned, and then update the GlobalState
-	t.emitTweet = function (data) {
-		console.log('twitter.js :: emitTweet');
+	emitTweet : function (data) {
 
 		var tweet;
 
@@ -138,15 +116,19 @@ module.exports = function (app, server, config) {
 				symbol: null,
 				time: null,
 				text: data.text,
-				country: ''
+				name: data.user.name,
+				screenName : data.user.screen_name,
+				id: data.id
 			};
 
 			//emit our tweet to any socket that is listening
-			socketServer.sockets.emit('tweet', tweet);
+			SocketController.emitMsg('tweet', tweet);
 		}
-	};
+	}
 
-	t.openStream();
 
-	return t;
 };
+
+var _self = TwitterController;
+
+module.exports = TwitterController;
