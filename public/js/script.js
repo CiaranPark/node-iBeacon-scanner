@@ -69,6 +69,7 @@ TMW.TwitterPoll = {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
 
+			// 4@snapshot
 			// Global send
 			// TODO - need to decide on what user this sends as will be shown on ticker
 			globalBtn.addEventListener('click', function() {
@@ -237,6 +238,7 @@ TMW.TwitterPoll = {
 		var tweetEl = document.querySelector('.tweet-' + tweet.id);
 		addClass(tweetEl, 'sent');
 
+		// string format - power@screenName (4@snapshot)
 		TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@' + tweet.screenName);
 	}
 
