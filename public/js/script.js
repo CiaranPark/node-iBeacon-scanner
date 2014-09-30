@@ -15,7 +15,6 @@ TMW.TwitterPoll = {
 	CURRENTLEVEL : null,
 	contentACTIONTYPE : null,
 
-
 	init : function () {
 
 		this.wallContent = document.querySelector('#wall-content');
@@ -50,13 +49,12 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.socket.on('state', TMW.TwitterPoll.setupScreen);
 
 			TMW.TwitterPoll.setMeter();
+			TMW.TwitterPoll.updatePower();
 
 			var loadBtn = TMW.TwitterPoll.createEl('button', 'LOAD MORE', 'section--tweets', 'btn btn--more');
 			var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
 
-			TMW.TwitterPoll.updatePower();
-
-			//Modal confirmations
+			//Modal confirmation buttons
 			TMW.TwitterPoll.btnConfirm.addEventListener('click', function() {
 				if ( TMW.TwitterPoll.ACTIONTYPE === 'send' ){
 					TMW.TwitterPoll.sendTweet(TMW.TwitterPoll.TWEET);
@@ -72,11 +70,10 @@ TMW.TwitterPoll = {
 			});
 
 			// Global send
-
+			// TODO - need to decide on what user this sends as will be shown on ticker
 			globalBtn.addEventListener('click', function() {
 				TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@snapshot');
 			});
-
 
 		},
 
@@ -102,8 +99,6 @@ TMW.TwitterPoll = {
 
 	},
 
-
-
 	// Creates the power meter based on slider range
 	setMeter: function () {
 
@@ -120,12 +115,12 @@ TMW.TwitterPoll = {
 
 	},
 
+	// basic element creation
 	createEl : function (type, text, target, class){
-
 		var el = document.createElement(type);
-		var smashTxt = document.createTextNode(text);
+		var elTxt = document.createTextNode(text);
 		el.className = class;
-		el.appendChild(smashTxt);
+		el.appendChild(elTxt);
 
 		if (target!=null) {
 			var trgt = document.querySelector('.' + target);
@@ -181,7 +176,7 @@ TMW.TwitterPoll = {
 		content.className = "content content-tweet"
 		content.innerHTML = tweet.text;
 
-
+		// Appending content
 		contentWrap.appendChild(tagName)
 		contentWrap.appendChild(content)
 
@@ -244,8 +239,6 @@ TMW.TwitterPoll = {
 
 		TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@' + tweet.screenName);
 	}
-
-
 
 };
 
