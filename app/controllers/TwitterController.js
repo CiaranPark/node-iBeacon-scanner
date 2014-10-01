@@ -12,7 +12,7 @@ var express = require('express'),
 
 	pkg = require('../../package.json'),
 	SocketController = null,
-	FAKE_TWEET = true,
+	FAKE_TWEET = false,
 	SERVER_BACKOFF_TIME = 5000; //Twitter backoff set to 30 seconds
 
 var TwitterController = {
@@ -49,7 +49,7 @@ var TwitterController = {
 					id: id++
 				};
 				TwitterController.emitTweet(data);
-			}, 6000);
+			}, 2000);
 
 		} else {
 			TwitterController.createStream();

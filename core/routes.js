@@ -15,7 +15,7 @@ module.exports = function (app, twitter) {
 	//Home route
 	app.get('/', function(req, res) {
         res.render('index', {
-        	title : 'Twitter Hashtag Streaming',
+        	title : 'Skylanders – Twitter Baseball',
         	tags : twitter.globalState.tags
         });
 	});

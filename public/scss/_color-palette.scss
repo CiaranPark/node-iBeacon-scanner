@@ -3,7 +3,7 @@
  */
 
 // Generic colours
-$blue                         : rgba(76,186,219,0.95);
+$blue                         : #6fc0ec;
 $green                        : #00cc65;
 $red                          : #e74c3c;
 $yellow                       : #f1c40f;
@@ -11,6 +11,8 @@ $orange                       : #e67e22;
 $pink                         : rgba(240,70,109,0.95);
 $purple                       : #8e44ad;
 $gray                         : #3a3a44;
+$grayDark                     : #31313a;
+
 
 // Colour Scheme
 $color-primary                : $blue;
@@ -18,8 +20,8 @@ $color-secondary              : $red;
 $color-highlight              : $yellow;
 
 // Common colours
-$color-text                   : #444;
-$color-bg                     : #f1f1f1;
+$color-text                   : #4e4e58;
+$color-bg                     : #fff;
 $color-border                 : #ddd;
 
 // Text Selection
@@ -35,8 +37,8 @@ $color-link-active            : darken($color-primary, 20%);
 
 
 // Buttons
-$btn-default-bg               : $gray;
-$btn-default-bg-highlight     : darken($btn-default-bg, 10%);
+$btn-default-bg               : $blue;
+$btn-default-bg-highlight     : darken($btn-default-bg, 20%);
 
 $btn-primary-bg               : $color-link-default;
 $btn-primary-bg-highlight     : darken($btn-primary-bg, 10%);
@@ -81,7 +83,7 @@ $placeholder-text             : lighten(#000, 70%);
 
 // Tables
 $table-bg                     : $color-bg !default; // Default background color used for all tables.
-$table-bg-accent              : #e8e8f3 !default; // Background color used for `.table-striped`.
+$table-bg-accent              : #f0f0fa !default; // Background color used for `.table-striped`.
 $table-bg-hover               : #f5f5f5 !default; // Background color used for `.table-hover`.
 $table-bg-active              : $table-bg-hover !default;
 $table-border                 : #ddd; // table and cell border

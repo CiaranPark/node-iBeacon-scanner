@@ -51,7 +51,7 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.setMeter();
 			TMW.TwitterPoll.updatePower();
 
-			var loadBtn = TMW.TwitterPoll.createEl('button', 'LOAD MORE', 'section--tweets', 'btn btn--more');
+			//var loadBtn = TMW.TwitterPoll.createEl('button', 'LOAD MORE', 'section--tweets', 'btn btn--more');
 			var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
 
 			//Modal confirmation buttons
@@ -139,8 +139,8 @@ TMW.TwitterPoll = {
 		// Column wraps
 		var contentWrap = document.createElement('div');
 		var btnWrap = document.createElement('div');
-		contentWrap.className = 'g-col g-span8';
-		btnWrap.className = 'g-col g-span4';
+		contentWrap.className = 'tweet-content g-col g-span8';
+		btnWrap.className = 'tweet-btns g-col g-span4';
 
 		// Tweet Element
 		newListElement = document.createElement('li');
@@ -169,7 +169,7 @@ TMW.TwitterPoll = {
 		var tagName = document.createElement('a');
 		tagName.setAttribute('href', 'http://www.twitter.com/'+ tweet.screenName);
 		tagName.setAttribute('target', '_new');
-		tagName.className = "title title-tweet";
+		tagName.className = "tweet-title";
 		tagName.innerHTML = '@' + tweet.screenName;
 
 		// Tweet content

@@ -11,17 +11,27 @@ html
 		div(class="container #{page}")
 			include ../includes/header
 
-			.page-content.g-container
+			.page-content.l-container
 				.g-row
 					section.g-col.g-span8.section--tweets
-						ul#wall-content.wall-content
+						h2.section-title.section-title--arrowed.tags
+							| Matching tags:&nbsp;
+							each val, key in tags
+								= val + ((key+1 !== tags.length) ? ', ' : '')
+						p.timeUpdated
+							em
+								| Updated:&nbsp;
+								span(id="last-update") Never
+						ul#wall-content.tweetWall.unstyled
+
 					section.g-col.g-span4.section--power
+						h2.section-title.section-title--arrowed Meter
 						.range--power
 							input.slider(type="range" name="slide" min="0" max="4" step="1" value="0")
 							ul.meter
 
 
 			include ../shared/modal
-			include ../includes/footer
+			//include ../includes/footer
 
 	include ../includes/foot

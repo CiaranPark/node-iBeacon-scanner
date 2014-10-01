@@ -44,7 +44,7 @@ $type-jumbo                    : $type-largest   * $type-scale;
 $font-weight-bold             : bold;
 
 /* Font stacks */
-$font-family-sans             : "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-sans             : 'Montserrat', sans-serif;
 $font-family-serif            : Georgia, "Times New Roman", Times, serif;
 $font-family-mono             : Menlo, Monaco, "Courier New", monospace;
 
@@ -52,7 +52,7 @@ $font-family-base             : $font-family-sans;
 $font-family-alt              : $font-family-serif;
 
 $font-family-headings         : inherit; // using inherit will use $font-family-base for all headings
-$font-weight-headings         : bold;    // instead of browser default, bold
+$font-weight-headings         : 700;    // instead of browser default, bold
 $line-height-headings         : 1.1;
 
 
@@ -86,14 +86,14 @@ $img-path                     : "/img"; // Usage: background: url('#{$img-path}/
 
 // Setup grid defaults
 $layout-margin                : 0     !default; // [in pixels] Space outside the grid
-$layout-max-width               : 1000  !default; // [in pixels]
-$layout-min-width               : 1000  !default; // [in pixels] Minimum width for layout in <IE9
+$layout-max-width             : 1300  !default; // [in pixels]
+$layout-min-width             : 1000  !default; // [in pixels] Minimum width for layout in <IE9
 
 $grid-column-count            : 12    !default; // Total column count
 $grid-gutter-width            : 20    !default; // [in pixels]
 
 // Column Padding
-$grid-column-padding          : 10    !default; // [in pixels]
+$grid-column-padding          : 0    !default; // [in pixels]
 $grid-column-padding-unit     : 'px'  !default; // [in pixels or percent] Specify your unit of measurement for column padding
 $nested-column-padding        : false !default; // Remove padding on nested columns so they are aligned correctly. Set this to [false] to enable it.
 

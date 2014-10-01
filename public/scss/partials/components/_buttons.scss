@@ -36,7 +36,9 @@
 	text-align: center;
 
 	// You may want to change this
-	background-color: $green;
+	background-color: $btn-default-bg;
+
+	transition: background-color 150ms;
 
 	&,
 	&:link,
@@ -191,6 +193,12 @@ input[type="button"] {
 
 .btn--delete {
 	background: $red;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: darken($red, 20%);
+	}
 }
 /*
    Close Button: for lightboxes etc
