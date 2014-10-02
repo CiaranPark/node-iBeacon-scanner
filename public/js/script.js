@@ -51,29 +51,16 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.setMeter();
 			TMW.TwitterPoll.updatePower();
 
-			//var loadBtn = TMW.TwitterPoll.createEl('button', 'LOAD MORE', 'section--tweets', 'btn btn--more');
-			var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
-
 			//Modal confirmation buttons
 			TMW.TwitterPoll.btnConfirm.addEventListener('click', function() {
 				if ( TMW.TwitterPoll.ACTIONTYPE === 'send' ){
 					TMW.TwitterPoll.sendTweet(TMW.TwitterPoll.TWEET);
-				} else {
-					TMW.TwitterPoll.destroyTweet(TMW.TwitterPoll.TWEET);
 				}
-
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
 
 			TMW.TwitterPoll.btnCancel.addEventListener('click', function() {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
-			});
-
-			// 4@snapshot
-			// Global send
-			// TODO - need to decide on what user this sends as will be shown on ticker
-			globalBtn.addEventListener('click', function() {
-				TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@snapshot');
 			});
 
 		},
@@ -83,8 +70,31 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.socket.on('tweet', TMW.TwitterPoll.tweetRecieved);
 		},
 
+		onSmash : function () {
+			// 4@snapshot
+			// Global send
+			// TODO - need to decide on what user this sends as will be shown on ticker
+			TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@snapshot');
+		},
+
 		onPowerChange : function() {
 			this.POWER_LEVEL.addEventListener("change", TMW.TwitterPoll.updatePower, false);
+		},
+
+		onSendTweet : function (e, tweet) {
+
+			TMW.TwitterPoll.ACTIONTYPE = 'send';
+			TMW.TwitterPoll.TWEET = tweet;
+			TMW.TwitterPoll.checkAction('send', tweet);
+
+		},
+
+		onDeleteTweet : function (e, tweet) {
+			log(tweet)
+			TMW.TwitterPoll.ACTIONTYPE = 'delete';
+			TMW.TwitterPoll.TWEET = tweet;
+			//TMW.TwitterPoll.checkAction('delete', tweet);
+			TMW.TwitterPoll.destroyTweet(TMW.TwitterPoll.TWEET);
 		}
 	},
 
@@ -114,6 +124,10 @@ TMW.TwitterPoll = {
 			meter.appendChild(step);
 		}
 
+		var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
+
+		globalBtn.addEventListener('click', TMW.TwitterPoll.EventListeners.onSmash);
+
 	},
 
 	// basic element creation
@@ -133,10 +147,9 @@ TMW.TwitterPoll = {
 
 	tweetRecieved : function (tweet) {
 
-		//Generate new id per tweet
-		var newListElement;
+		var newListElement; //Generate new list element per tweet
 
-		// Column wraps
+		// Column wrappers
 		var contentWrap = document.createElement('div');
 		var btnWrap = document.createElement('div');
 		contentWrap.className = 'tweet-content g-col g-span8';
@@ -150,20 +163,15 @@ TMW.TwitterPoll = {
 		var tweetSendBtn = TMW.TwitterPoll.createEl('button', 'Send', null, 'btn btn--send');
 		var tweetDeleteBtn = TMW.TwitterPoll.createEl('button', 'Delete', null, 'btn btn--delete');
 
-		tweetSendBtn.addEventListener('click', function(e){
-			TMW.TwitterPoll.ACTIONTYPE = 'send';
-			TMW.TwitterPoll.TWEET = tweet;
-			TMW.TwitterPoll.checkAction('send', tweet);
+		tweetSendBtn.addEventListener('click', function (e) {
+			TMW.TwitterPoll.EventListeners.onSendTweet(e, tweet);
+		});
+		tweetDeleteBtn.addEventListener('click', function (e) {
+			TMW.TwitterPoll.EventListeners.onDeleteTweet(e, tweet);
 		});
 
-		tweetDeleteBtn.addEventListener('click', function(e){
-			TMW.TwitterPoll.ACTIONTYPE = 'delete';
-			TMW.TwitterPoll.TWEET = tweet;
-			TMW.TwitterPoll.checkAction('delete', tweet);
-		});
-
-		btnWrap.appendChild(tweetSendBtn);
 		btnWrap.appendChild(tweetDeleteBtn);
+		btnWrap.appendChild(tweetSendBtn);
 
 		// Tweet Title
 		var tagName = document.createElement('a');
@@ -174,7 +182,7 @@ TMW.TwitterPoll = {
 
 		// Tweet content
 		var content = document.createElement('p');
-		content.className = "content content-tweet"
+		content.className = "content tweet-text"
 		content.innerHTML = tweet.text;
 
 		// Appending content
@@ -191,15 +199,15 @@ TMW.TwitterPoll = {
 
 	// Check if send/delete is OK
 	checkAction : function(ACTIONTYPE, tweet) {
-		var screenName = tweet.screenName;
+		var screenName = tweet.name;
 
 		if ( TMW.TwitterPoll.ACTIONTYPE === 'send' ) {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'SEND TO BAT?';
-			TMW.TwitterPoll.MODALCONTENT.innerHTML = 'SEND Lorem Ipsum is simply dummy text of the printing and typesetting industry';
+			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
 			removeClass(TMW.TwitterPoll.MODALWINDOW, 'modal--delete');
 		} else {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'REMOVE TWEET?';
-			TMW.TwitterPoll.MODALCONTENT.innerHTML = 'Delete Lorem Ipsum is simply dummy text of the printing and typesetting industry';
+			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
 			addClass(TMW.TwitterPoll.MODALWINDOW, 'modal--delete');
 		}
 
@@ -227,8 +235,10 @@ TMW.TwitterPoll = {
 
 	//TODO tweet needs to be inactive/toggled??
 	destroyTweet : function(tweet) {
+
 		var tweetEl = document.querySelector('.tweet-' + tweet.id);
 		addClass(tweetEl, 'inactive');
+
 	},
 
 	// Send tweet data to arduino

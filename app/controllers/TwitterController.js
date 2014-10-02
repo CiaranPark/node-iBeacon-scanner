@@ -12,7 +12,7 @@ var express = require('express'),
 
 	pkg = require('../../package.json'),
 	SocketController = null,
-	FAKE_TWEET = false,
+	FAKE_TWEET = true,
 	SERVER_BACKOFF_TIME = 5000; //Twitter backoff set to 30 seconds
 
 var TwitterController = {
@@ -42,9 +42,9 @@ var TwitterController = {
 				data = {
 					symbol: 'fake symbol',
 					time: 'fake time',
-					text: 'fake text',
+					text: 'I absolutely love the new Skylander game – want all the characters now!! #skylanders',
 					user : {
-						name : 'fake name'
+						name : 'skylandersTest'
 					},
 					id: id++
 				};
