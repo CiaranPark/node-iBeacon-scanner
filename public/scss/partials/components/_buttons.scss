@@ -200,6 +200,16 @@ input[type="button"] {
 		background-color: darken($red, 20%);
 	}
 }
+
+.btn--reset {
+	background: $red;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: darken($red, 20%);
+	}
+}
 /*
    Close Button: for lightboxes etc
    ========================================================================== */

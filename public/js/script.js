@@ -63,6 +63,14 @@ TMW.TwitterPoll = {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
 
+			window.addEventListener('keyup', function(e){
+
+				if (e.keyIdentifier == "U+0020") {
+					//console.log('STOP')
+					TMW.TwitterPoll.socket.emit('tweet-sent', '6');
+				}
+			})
+
 		},
 
 		onTweet : function () {
@@ -71,10 +79,11 @@ TMW.TwitterPoll = {
 		},
 
 		onSmash : function () {
-			// 4@snapshot
-			// Global send
-			// TODO - need to decide on what user this sends as will be shown on ticker
-			TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@snapshot');
+			TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL);
+		},
+
+		onReset : function () {
+			TMW.TwitterPoll.socket.emit('tweet-sent', '7');
 		},
 
 		onPowerChange : function() {
@@ -124,8 +133,10 @@ TMW.TwitterPoll = {
 		}
 
 		var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
+		var resetBtn = TMW.TwitterPoll.createEl('button', 'RESET', 'section--power', 'btn btn--reset');
 
 		globalBtn.addEventListener('click', TMW.TwitterPoll.EventListeners.onSmash);
+		resetBtn.addEventListener('click', TMW.TwitterPoll.EventListeners.onReset);
 
 	},
 
@@ -270,7 +281,8 @@ TMW.TwitterPoll = {
 		addClass(tweetEl, 'sent');
 
 		// string format - power@screenName (4@snapshot)
-		TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@' + tweet.screenName);
+		//TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL + '@' + tweet.screenName);
+		TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL);
 	}
 
 };
