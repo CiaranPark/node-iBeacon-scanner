@@ -59,8 +59,6 @@ TMW.TwitterPoll = {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
 
-			var client = new ZeroClipboard(TMW.TwitterPoll.btnConfirm);
-
 			TMW.TwitterPoll.btnCancel.addEventListener('click', function() {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
@@ -164,6 +162,12 @@ TMW.TwitterPoll = {
 		var tweetSendBtn = TMW.TwitterPoll.createEl('button', 'Send', null, 'btn btn--send');
 		var tweetDeleteBtn = TMW.TwitterPoll.createEl('button', 'Delete', null, 'btn btn--delete');
 
+		var pasteText = '@' + tweet.name + ': ' + tweet.text;
+
+		tweetSendBtn.setAttribute('data-clipboard-text', pasteText);
+
+		var client = new ZeroClipboard(tweetSendBtn);
+
 		tweetSendBtn.addEventListener('click', function (e) {
 			TMW.TwitterPoll.EventListeners.onSendTweet(e, tweet);
 		});
@@ -206,12 +210,6 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'SEND TO BAT?';
 			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
 			removeClass(TMW.TwitterPoll.MODALWINDOW, 'modal--delete');
-
-			var confirmBtn = TMW.TwitterPoll.MODALWINDOW.querySelector('.btn--true'),
-				pasteText = '@' + tweet.name + ': ' + tweet.text;
-
-			confirmBtn.setAttribute('data-clipboard-text', pasteText);
-
 		} else {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'REMOVE TWEET?';
 			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
