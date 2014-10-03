@@ -560,13 +560,13 @@ samp {
 }
 
 ::-moz-selection {
-  color: #fff;
+  color: white;
   background: #6fc0ec;
   text-shadow: none;
 }
 
 ::selection {
-  color: #fff;
+  color: white;
   background: #6fc0ec;
   text-shadow: none;
 }
@@ -759,6 +759,13 @@ input[type="button"].btn--block {
   background: #e74c3c;
 }
 .btn--delete:hover, .btn--delete:active, .btn--delete:focus {
+  background-color: #a82315;
+}
+
+.btn--reset {
+  background: #e74c3c;
+}
+.btn--reset:hover, .btn--reset:active, .btn--reset:focus {
   background-color: #a82315;
 }
 
@@ -1051,8 +1058,8 @@ input[type="button"].btn--block {
   color: #4e4e58;
   font-weight: normal;
   vertical-align: baseline;
-  background-color: #fff;
-  border: 2px solid #ccc;
+  background-color: white;
+  border: 2px solid #cccccc;
   border-radius: 5px;
   -webkit-transition: border 200ms ease-in-out;
      -moz-transition: border 200ms ease-in-out;
@@ -1083,7 +1090,7 @@ input[type="button"].btn--block {
   padding: initial;
   line-height: initial;
   border: initial;
-  background-color: #fff;
+  background-color: white;
   background-color: initial;
 }
 .form-input[type="hidden"] {
@@ -1106,7 +1113,7 @@ input[type="button"].btn--block {
 }
 .form-input[disabled], .form-input[readonly] {
   background-color: #e6e6e6;
-  border-color: #ccc;
+  border-color: #cccccc;
   cursor: not-allowed;
 }
 
@@ -1121,7 +1128,7 @@ input[type="button"].btn--block {
 }
 
 .form-input--select {
-  background-color: #fff;
+  background-color: white;
 }
 .form-input--select[multiple], .form-input--select[size] {
   height: auto;
@@ -1233,7 +1240,7 @@ input[type="submit"] {
   padding: 25px 20px;
   margin-top: 25px;
   margin-bottom: 25px;
-  background-color: #f5f5f5;
+  background-color: whitesmoke;
   border-top: 1px solid #ddd;
 }
 .form-actions .btn, .form-actions .tabs a, .tabs .form-actions a {
@@ -1430,7 +1437,7 @@ input[type="submit"] {
   /* Put the input behind the label so it doesn't overlay text */
 }
 .control--custom input:focus ~ .control-indicator {
-  box-shadow: 0 0 0 0.075rem #fff, 0 0 0 0.2rem #464652;
+  box-shadow: 0 0 0 0.075rem white, 0 0 0 0.2rem #464652;
 }
 .control--custom input:checked ~ .control-indicator {
   color: #fff;
@@ -1779,7 +1786,7 @@ img, object, embed, video {
  * Tables
  */
 table {
-  background-color: #fff;
+  background-color: white;
 }
 
 th {
@@ -1802,15 +1809,15 @@ th {
   padding: 8px;
   line-height: 25px;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
 }
 .table > thead > tr > th,
 .table > thead > tr > td {
   vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #dddddd;
 }
 .table > tfoot > tr > td {
-  border-top: 3px solid #ddd;
+  border-top: 3px solid #dddddd;
 }
 .table > caption + thead > tr:first-child > th,
 .table > caption + thead > tr:first-child > td,
@@ -1821,10 +1828,10 @@ th {
   border-top: 0;
 }
 .table > tbody + tbody {
-  border-top: 2px solid #ddd;
+  border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #fff;
+  background-color: white;
 }
 
 .table--condensed > thead > tr > th,
@@ -1841,7 +1848,7 @@ th {
  * Add borders all around the table and between all the columns.
  */
 .table--bordered {
-  border: 2px solid #ddd;
+  border: 2px solid #dddddd;
 }
 .table--bordered > thead > tr > th,
 .table--bordered > thead > tr > td,
@@ -1849,7 +1856,7 @@ th {
 .table--bordered > tbody > tr > td,
 .table--bordered > tfoot > tr > th,
 .table--bordered > tfoot > tr > td {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 .table--bordered > thead > tr > th,
 .table--bordered > thead > tr > td {
@@ -1901,7 +1908,7 @@ th {
  */
 .table--hover > tbody > tr:hover > td,
 .table--hover > tbody > tr:hover > th {
-  background-color: #f5f5f5;
+  background-color: whitesmoke;
 }
 
 /**
@@ -1932,7 +1939,7 @@ table th[class*="col-"] {
     overflow-y: hidden;
     overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     -webkit-overflow-scrolling: touch;
   }
   .tableResponsive > .table {
@@ -1983,7 +1990,7 @@ pre {
   font-family: Menlo, Monaco, "Courier New", monospace;
   font-size: 14.4px;
   font-size: 0.8rem;
-  color: #444;
+  color: #444444;
   border-radius: 3px;
   -moz-tab-size: 3;
        tab-size: 3;
@@ -1991,23 +1998,23 @@ pre {
 
 code {
   padding: 2px 4px;
-  color: #444;
-  background-color: #ddd;
+  color: #444444;
+  background-color: #dddddd;
 }
 
 pre {
   display: block;
   padding: 12.5px;
   margin: 0 0 25px;
-  color: #444;
-  background-color: #ddd;
+  color: #444444;
+  background-color: #dddddd;
   border-radius: 4px;
   white-space: pre;
 }
 pre code {
   padding: 0;
-  color: #444;
-  background-color: #ddd;
+  color: #444444;
+  background-color: #dddddd;
   border: 0;
 }
 
@@ -2069,7 +2076,7 @@ html, body {
 }
 
 body {
-  background-color: #fff;
+  background-color: white;
 }
 
 /**
@@ -2180,6 +2187,11 @@ body {
  * Views
  * =================================
  */
+.btn--reset {
+  clear: both;
+  display: block;
+}
+
 .section--tweets {
   height: 100%;
 }
@@ -2203,8 +2215,7 @@ body {
   padding-bottom: 0;
 }
 .tweet.sent {
-  background: #00cc65;
-  opacity: 0.5;
+  background: #ccffe5;
 }
 
 .tweet-title {

@@ -78,6 +78,8 @@ var MsgController = {
 		//takes a string and writes it to the arduino
 		writeOutput : function (data) {
 
+			console.log(data)
+
 			sp.write(data, function (error) {
 				if (error !== undefined) {
 					console.log(error);
