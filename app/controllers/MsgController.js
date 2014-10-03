@@ -59,23 +59,19 @@ var MsgController = {
 			//connect to the arduino through it’s path
 			//sp = new SerialPort("/dev/tty.usbserial-A92HH373", {
 
-			/*
-
-			sp = new SerialPort("/dev/tty.usbmodem14111", {
-				baudrate: 9600,
+			sp = new SerialPort("COM11", {
+					baudrate: 0,
 	    			parser: require("serialport").parsers.readline('\r\n')
 			});
-
+			
 			//wait for our connection to open up
-			sp.open(function (e) {
+			sp.on('open', function (e) {
 				if (e) {
 					console.log('failed to open : '+ e);
 				} else {
 					_self.Arduino.onSerialOpen();
 				}
 			});
-
-			*/
 
 		},
 
