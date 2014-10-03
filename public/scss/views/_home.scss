@@ -34,8 +34,7 @@ $range-thumb-border:            2px solid $range-background-color !default;
 		}
 
 		&.sent {
-			background: $green;
-			opacity: 0.5
+			background: lighten($green, 50%);
 		}
 	}
 		.tweet-content {

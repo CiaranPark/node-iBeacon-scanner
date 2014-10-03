@@ -2064,8 +2064,7 @@ body {
   padding-bottom: 0;
 }
 .tweet.sent {
-  background: #00cc65;
-  opacity: 0.5;
+  background: #ccffe5;
 }
 
 .tweet-title {

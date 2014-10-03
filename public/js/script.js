@@ -59,6 +59,8 @@ TMW.TwitterPoll = {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
 
+			var client = new ZeroClipboard(TMW.TwitterPoll.btnConfirm);
+
 			TMW.TwitterPoll.btnCancel.addEventListener('click', function() {
 				addClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 			});
@@ -90,7 +92,6 @@ TMW.TwitterPoll = {
 		},
 
 		onDeleteTweet : function (e, tweet) {
-			log(tweet)
 			TMW.TwitterPoll.ACTIONTYPE = 'delete';
 			TMW.TwitterPoll.TWEET = tweet;
 			//TMW.TwitterPoll.checkAction('delete', tweet);
@@ -131,13 +132,13 @@ TMW.TwitterPoll = {
 	},
 
 	// basic element creation
-	createEl : function (type, text, target, class){
+	createEl : function (type, text, target, className) {
 		var el = document.createElement(type);
 		var elTxt = document.createTextNode(text);
-		el.className = class;
+		el.className = className;
 		el.appendChild(elTxt);
 
-		if (target!=null) {
+		if (target !== null) {
 			var trgt = document.querySelector('.' + target);
 			trgt.appendChild(el);
 		}
@@ -175,19 +176,19 @@ TMW.TwitterPoll = {
 
 		// Tweet Title
 		var tagName = document.createElement('a');
-		tagName.setAttribute('href', 'http://www.twitter.com/'+ tweet.screenName);
+		tagName.setAttribute('href', 'http://www.twitter.com/'+ tweet.name);
 		tagName.setAttribute('target', '_new');
 		tagName.className = "tweet-title";
-		tagName.innerHTML = '@' + tweet.screenName;
+		tagName.innerHTML = '@' + tweet.name;
 
 		// Tweet content
 		var content = document.createElement('p');
-		content.className = "content tweet-text"
+		content.className = "content tweet-text";
 		content.innerHTML = tweet.text;
 
 		// Appending content
-		contentWrap.appendChild(tagName)
-		contentWrap.appendChild(content)
+		contentWrap.appendChild(tagName);
+		contentWrap.appendChild(content);
 
 		newListElement.appendChild(contentWrap);
 		newListElement.appendChild(btnWrap);
@@ -205,6 +206,12 @@ TMW.TwitterPoll = {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'SEND TO BAT?';
 			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
 			removeClass(TMW.TwitterPoll.MODALWINDOW, 'modal--delete');
+
+			var confirmBtn = TMW.TwitterPoll.MODALWINDOW.querySelector('.btn--true'),
+				pasteText = '@' + tweet.name + ': ' + tweet.text;
+
+			confirmBtn.setAttribute('data-clipboard-text', pasteText);
+
 		} else {
 			TMW.TwitterPoll.MODALTITLE.innerHTML = 'REMOVE TWEET?';
 			TMW.TwitterPoll.MODALCONTENT.innerHTML = tweet.text;
@@ -213,6 +220,22 @@ TMW.TwitterPoll = {
 
 		removeClass(TMW.TwitterPoll.MODALWINDOW, 'is-hidden');
 		TMW.TwitterPoll.MODALSUBTITLE.innerHTML = '@' + screenName;
+	},
+
+
+	saveToClipboard : function (event, tweet) {
+
+		log(tweet);
+
+		var textToCopy = tweet.name + tweet.text;
+
+		var clipboard = event.clipboardData;
+		clipboard.setData( "text/plain", textToCopy );
+		//clipboard.setData( "text/html", "<b>Copy me!</b>" );
+		//clipboard.setData( "application/rtf", "{\\rtf1\\ansi\n{\\b Copy me!}}" );
+
+
+
 	},
 
 	// Updates the power
@@ -230,7 +253,7 @@ TMW.TwitterPoll = {
 				removeClass(steps[i], 'active');
 			}
 
-		};
+		}
 	},
 
 	//TODO tweet needs to be inactive/toggled??
