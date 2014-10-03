@@ -11,6 +11,12 @@ $range-thumb-height:            $range-width * 2 !default;
 $range-thumb-background:        #009ccc !default;
 $range-thumb-border:            2px solid $range-background-color !default;
 
+
+.btn--reset {
+	clear: both;
+	display: block;
+}
+
 .section--tweets {
 	height: 100%;
 }

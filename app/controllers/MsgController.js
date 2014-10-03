@@ -60,8 +60,7 @@ var MsgController = {
 			//sp = new SerialPort("/dev/tty.usbserial-A92HH373", {
 
 			/*
-
-			sp = new SerialPort("/dev/tty.usbmodem14111", {
+			sp = new SerialPort("/dev/tty.usbmodem14141", {
 				baudrate: 9600,
 	    			parser: require("serialport").parsers.readline('\r\n')
 			});
@@ -74,13 +73,14 @@ var MsgController = {
 					_self.Arduino.onSerialOpen();
 				}
 			});
-
-			*/
+*/
 
 		},
 
 		//takes a string and writes it to the arduino
 		writeOutput : function (data) {
+
+			console.log(data)
 
 			sp.write(data, function (error) {
 				if (error !== undefined) {
