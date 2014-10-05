@@ -36,7 +36,7 @@ var MsgController = {
 		//setup our Arduino connection
 		//commented out for testing purposes
 
-		_self.Arduino.setupConnection();
+		//_self.Arduino.setupConnection();
 
 		return _self;
 
@@ -65,7 +65,7 @@ var MsgController = {
 					baudrate: 9600,
 	    			parser: require("serialport").parsers.readline('\r\n')
 			});
-			
+
 			//wait for our connection to open up
 			sp.on('open', function (e) {
 				if (e) {

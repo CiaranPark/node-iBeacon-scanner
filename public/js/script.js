@@ -81,11 +81,14 @@ TMW.TwitterPoll = {
 
 		onSmash : function () {
 			TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL);
-			log('somethinmg');
 		},
 
-		onReset : function () {
-			TMW.TwitterPoll.socket.emit('tweet-sent', '7');
+		onReset : function (direction) {
+			if (direction === 'ACW') {
+				TMW.TwitterPoll.socket.emit('tweet-sent', '7');
+			} else if (direction === 'CW') {
+				TMW.TwitterPoll.socket.emit('tweet-sent', '8');
+			}
 		},
 
 		onPowerChange : function() {
@@ -135,10 +138,16 @@ TMW.TwitterPoll = {
 		}
 
 		var globalBtn = TMW.TwitterPoll.createEl('button', 'SMASH!', 'section--power', 'btn btn--smash');
-		var resetBtn = TMW.TwitterPoll.createEl('button', 'RESET', 'section--power', 'btn btn--reset');
+		var resetACWBtn = TMW.TwitterPoll.createEl('button', 'RESET ACW', 'section--power', 'btn btn--reset');
+		var resetCWBtn = TMW.TwitterPoll.createEl('button', 'RESET CW', 'section--power', 'btn btn--reset');
 
 		globalBtn.addEventListener('click', TMW.TwitterPoll.EventListeners.onSmash);
-		resetBtn.addEventListener('click', TMW.TwitterPoll.EventListeners.onReset);
+		resetACWBtn.addEventListener('click', function () {
+			TMW.TwitterPoll.EventListeners.onReset('ACW');
+		});
+		resetCWBtn.addEventListener('click', function () {
+			TMW.TwitterPoll.EventListeners.onReset('CW');
+		});
 
 	},
 
