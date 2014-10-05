@@ -12,6 +12,8 @@ var
 	isConnectionOpen = false,
 	buffer = '',
 
+	COM_PORT = 'COM11',
+
 	timer = null,
 	uiState = null,
 
@@ -59,8 +61,8 @@ var MsgController = {
 			//connect to the arduino through it’s path
 			//sp = new SerialPort("/dev/tty.usbserial-A92HH373", {
 
-			sp = new SerialPort("COM11", {
-					baudrate: 0,
+			sp = new SerialPort(COM_PORT, {
+					baudrate: 9600,
 	    			parser: require("serialport").parsers.readline('\r\n')
 			});
 			
@@ -78,9 +80,7 @@ var MsgController = {
 		//takes a string and writes it to the arduino
 		writeOutput : function (data) {
 
-			console.log(data)
-
-			sp.write(data, function (error) {
+			sp.write(data.replace(/\s/, ''), function (error) {
 				if (error !== undefined) {
 					console.log(error);
 				}
@@ -132,7 +132,7 @@ var MsgController = {
 		},
 
 		tweetSendHandler : function (data) {
-			_self.sendMessage('server', data + '\n');
+			_self.sendMessage('server', data);
 		},
 
 		userLoginHandler : function () {

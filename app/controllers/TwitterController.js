@@ -12,7 +12,7 @@ var express = require('express'),
 
 	pkg = require('../../package.json'),
 	SocketController = null,
-	FAKE_TWEET = true,
+	FAKE_TWEET = true, //SWITCH TO FALSE ON DAY
 	SERVER_BACKOFF_TIME = 5000; //Twitter backoff set to 30 seconds
 
 var TwitterController = {
@@ -20,7 +20,7 @@ var TwitterController = {
 	t : null,
 
 	globalState : {
-		tags : ['dogs', 'cats']
+		tags : ['hitpainyatta'] // hitpainyatta is the actual event tag
 	},
 
 	init : function (app, server, socketController, config) {

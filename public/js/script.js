@@ -68,6 +68,7 @@ TMW.TwitterPoll = {
 				if (e.keyIdentifier == "U+0020") {
 					//console.log('STOP')
 					TMW.TwitterPoll.socket.emit('tweet-sent', '6');
+					e.preventDefault();
 				}
 			})
 
@@ -80,6 +81,7 @@ TMW.TwitterPoll = {
 
 		onSmash : function () {
 			TMW.TwitterPoll.socket.emit('tweet-sent', TMW.TwitterPoll.CURRENTLEVEL);
+			log('somethinmg');
 		},
 
 		onReset : function () {
