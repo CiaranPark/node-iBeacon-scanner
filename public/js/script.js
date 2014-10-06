@@ -167,7 +167,7 @@ TMW.TwitterPoll = {
 	},
 
 	tweetRecieved : function (tweet) {
-
+		console.log(tweet);
 		var newListElement; //Generate new list element per tweet
 
 		// Column wrappers
@@ -184,7 +184,7 @@ TMW.TwitterPoll = {
 		var tweetSendBtn = TMW.TwitterPoll.createEl('button', 'Send', null, 'btn btn--send');
 		var tweetDeleteBtn = TMW.TwitterPoll.createEl('button', 'Delete', null, 'btn btn--delete');
 
-		var pasteText = '@' + tweet.name + ': ' + tweet.text;
+		var pasteText = '@' + tweet.screenName + ': ' + tweet.text;
 
 		tweetSendBtn.setAttribute('data-clipboard-text', pasteText);
 
@@ -205,7 +205,7 @@ TMW.TwitterPoll = {
 		tagName.setAttribute('href', 'http://www.twitter.com/'+ tweet.name);
 		tagName.setAttribute('target', '_new');
 		tagName.className = "tweet-title";
-		tagName.innerHTML = '@' + tweet.name;
+		tagName.innerHTML = '@' + tweet.screenName;
 
 		// Tweet content
 		var content = document.createElement('p');

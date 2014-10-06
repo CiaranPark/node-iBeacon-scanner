@@ -12,7 +12,7 @@ var
 	isConnectionOpen = false,
 	buffer = '',
 
-	COM_PORT = 'COM11',
+	COM_PORT = 'COM15',
 
 	timer = null,
 	uiState = null,
@@ -63,7 +63,7 @@ var MsgController = {
 
 			sp = new SerialPort(COM_PORT, {
 					baudrate: 9600,
-	    			parser: require("serialport").parsers.readline('\r\n')
+					parser: require("serialport").parsers.readline('\r\n')
 			});
 
 			//wait for our connection to open up
