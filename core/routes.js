@@ -10,15 +10,7 @@ var async = require('async')
  * Expose routes
  */
 
-module.exports = function (app, twitter) {
-
-	//Home route
-	app.get('/', function(req, res) {
-        res.render('index', {
-        	title : 'Skylanders – Twitter Baseball',
-        	tags : twitter.globalState.tags
-        });
-	});
+module.exports = function (app) {
 
 
 	// assume "not found" in the error msgs
@@ -38,7 +30,7 @@ module.exports = function (app, twitter) {
 		console.error(err.stack);
 
 		// error page
-		res.status(500).render('500', { error: err.stack });
+		//res.status(500).render('500', { error: err.stack });
 	});
 
 
@@ -49,5 +41,15 @@ module.exports = function (app, twitter) {
 			error: 'Not found'
 		});
 	});
+
+	
+	//Home route
+	app.get('/', function(req, res) {
+        res.render('index', {
+        	title : 'Security Scanner – iBeacons',
+        	tags : "tags"
+        });
+	});
+
 
 }

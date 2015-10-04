@@ -37,20 +37,21 @@ var server = http.createServer(app);
 server.listen(app.get('port'), function(){
 	console.log('app.js: Express server listening on port ' + app.get('port'));
 });
+
 server.on('close', function(socket) {
 	console.log('app.js: Server has closed');
 });
 
 //setup our socketServer Connection
-var socketController = require('./app/controllers/SocketController');
-socketController.setup(app, server, config);
+// var socketController = require('./app/controllers/SocketController');
+// socketController.setup(app, server, config);
 
-var MsgController = require('./app/controllers/MsgController').init(app, server, socketController, config);
-var twitter = require('./app/controllers/TwitterController').init(app, server, socketController, config);
+// var MsgController = require('./app/controllers/MsgController').init(app, server, socketController, config);
+// var twitter = require('./app/controllers/TwitterController').init(app, server, socketController, config);
 
 
 // Bootstrap routes
-require('./core/routes')(app, twitter);
+require('./core/routes')(app);
 
 
 // expose app as the scope

@@ -11,7 +11,6 @@ var
 	socketServer = null,
 
 	TwitterController = require('./TwitterController');
-	MsgController = require('./MsgController');
 
 	pkg = require('../../package.json');
 
@@ -30,8 +29,6 @@ var SocketController = {
 		//so here that would be how many tweets of each type we have stored
 		socketServer.sockets.on('connection', function(socket) {
 			console.log('ui : new connection logged');
-
-			socketServer.sockets.emit('state', TwitterController.globalState);
 			MsgController.UI.newConnection(socket);
 		});
 

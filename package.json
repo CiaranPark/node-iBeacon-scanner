@@ -1,8 +1,8 @@
 {
-  "name": "skylanders-launch",
-  "title": "Skylanders Launch",
-  "description": "Skylanders launch – node arduino mashup with a baseball bat",
-  "url": "https://bitbucket.org/tmwagency/activision-35158-skylanders-launch",
+  "name": "security-scanner",
+  "title": "Security Scanner",
+  "description": "security-scanner – node ibeacon for raspberry pi",
+  "url": "",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -18,8 +18,7 @@
     "socket.io": "1.0.3",
     "socket.io-client": "1.0.3",
     "async": "0.9.0",
-    "serialport": "^1.4.5",
-    "twitter": "0.2.9"
+    "serialport": "^1.4.5"
   },
   "devDependencies": {
     "glob": "~4.0.5",
@@ -41,9 +40,9 @@
     "grunt-shimly": "0.0.7",
     "grunt-svgmin": "~1.0.0",
     "load-grunt-configs": "~0.4.0",
-    "load-grunt-tasks": "~0.6.0"
+    "load-grunt-tasks": "~0.6.0",
+    "noble": "^1.1.0"
   },
-  "subdomain": "twitterpoll",
   "engines": {
     "node": "0.10.x"
   }
